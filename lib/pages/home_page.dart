@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moda_app/pages/detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,12 +8,61 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  late TabController _tabController;
+  @override
+  void initState() {
+    //
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     String appNameTitle = 'Discovery';
     String fontPath = 'assets/fonts/fonts.ttf';
     return Scaffold(
+      bottomNavigationBar: Material(
+        child: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(
+              icon: Icon(
+                Icons.more,
+                color: Colors.grey,
+                size: 22,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.play_arrow,
+                color: Colors.grey,
+                size: 22,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.navigation,
+                color: Colors.grey,
+                size: 22,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.supervised_user_circle,
+                color: Colors.grey,
+                size: 22,
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
@@ -139,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: MediaQuery.of(context).size.width - 186,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -172,15 +222,28 @@ class _HomePageState extends State<HomePage> {
                       height: 250,
                       //color: Colors.blue,
                       child: Row(children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width / 2 - 40,
-                          height: 250,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: const DecorationImage(
-                                image:
-                                    AssetImage('assets/images/modelgrid1.jpeg'),
-                                fit: BoxFit.cover),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DetailPage(
+                                    img: 'assets/images/modelgrid1.jpeg'),
+                              ),
+                            );
+                          },
+                          child: Hero(
+                            tag: 'assets/images/modelgrid1.jpeg',
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 2 - 40,
+                              height: 250,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/modelgrid1.jpeg'),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -188,29 +251,56 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Column(
                           children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2 - 29,
-                              height: 120,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                image: const DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/modelgrid2.jpeg'),
-                                    fit: BoxFit.cover),
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        img: 'assets/images/modelgrid2.jpeg'),
+                                  ),
+                                );
+                              },
+                              child: Hero(
+                                tag: 'assets/images/modelgrid2.jpeg',
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width / 2 -
+                                      29,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    image: const DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/modelgrid2.jpeg'),
+                                        fit: BoxFit.cover),
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2 - 29,
-                              height: 120,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                image: const DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/modelgrid3.jpeg'),
-                                    fit: BoxFit.cover),
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                        img: 'assets/images/modelgrid3.jpeg'),
+                                  ),
+                                );
+                              },
+                              child: Hero(
+                                tag: 'assets/images/modelgrid3.jpeg',
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width / 2 - 29,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    image: const DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/modelgrid3.jpeg'),
+                                        fit: BoxFit.cover),
+                                  ),
+                                ),
                               ),
                             ),
                           ],
